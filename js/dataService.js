@@ -7,13 +7,24 @@ app.service("dataService", function(){
 
 	this.addData = function(newObj){
 		quotes.push(newObj);
+		// window.localStorage.quotes = JSON.stringify(quotes);
 	};
 
-	this.removeData = function(elimQuote){
-		for (text in quotes) {
-			quotes.splice(elimQuote);
+	this.removeData = function(words){
+		for (var i = 0; i < quotes.length; i++) {
+			if (quotes[i].text === words){
+				quotes.splice([i], 1);
+			}
 		}
+		window.localStorage.quotes = JSON.stringify(quotes);
 	};
+
+
+	
+localStorage.setItem('quotes', JSON.stringify(quotes));
+// var retrievedObj = localStorage.getItem('quotes');
+// console.log('retrievedObj: ', JSON.parse(retrievedObj));
+
 
 	var quotes =
 	[
@@ -26,3 +37,6 @@ app.service("dataService", function(){
 	    { text: 'What even is a jQuery?', author: 'Tyler S. McGinnis'}
   	]
 });
+
+
+

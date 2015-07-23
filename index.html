@@ -6,19 +6,43 @@
 
 <body ng-controller="mainCtrl">	
 	<!-- Input Boxes and Button for New Quotes -->
-	<input placeholder = "Add Quote Text" ng-model="addObj.text" />
-	<input placeholder = "Add Quote's Author" ng-model="addObj.author" />
-	<button ng-click="addIt()">Submit</button>
-	<button ng-click="deleteIt()">Delete</button>
+	<!-- <input placeholder = "Quote Text" ng-model="addObj.text" />
+	<input placeholder = "Quote's Author" ng-model="addObj.author" />
+	<button ng-click="addIt()">Add Quote</button> -->
 
+	<!-- Remove Quotes -->
+	<!-- <input placeholder = "Quote Text" ng-model="deleteObj.text" />
+	<button ng-click="deleteIt(text)">Delete Quote</button> -->
+	
+	<select ng-model="select">
+		<option value="add">Add</option>
+		<option value="delete">Delete</option>
+		<option value="filter">Filter</option>
+	</select>
 
-	<!-- Show Current Quotes -->
-	<div ng-repeat="quote in currentQuotes">
-		<p>{{quote.text}} ({{quote.author}})</p>
+	<div ng-show="select === 'add'">
+		<input placeholder = "Quote Text" ng-model="addObj.text" />
+		<input placeholder = "Quote's Author" ng-model="addObj.author" />
+		<button ng-click="addIt()">Add Quote</button>
+	</div>
+
+	<div ng-show="select === 'delete'">
+		<input placeholder = "Quote Text" ng-model="deleteObj.text" />
+		<button ng-click="deleteIt(text)">Delete Quote</button>
+	</div>
+
+	<div ng-show="select === 'filter'">
+		<input class="form-control" placeholder="Search Quote" ng-model="search.text" />
+		<button ng-click="filterIt()">Filter Quotes</button>
 	</div>
 
 
-	<!-- Remove Quotes -->
+	<!-- Show Current Quotes -->
+	<div ng-repeat="quote in currentQuotes | filter:search">
+		<p>{{quote.text}} ({{quote.author}})</p>
+	</div>
+
+	
 
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.js"></script>

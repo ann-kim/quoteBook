@@ -4,17 +4,16 @@ app.controller("mainCtrl", function($scope, dataService){
 	//Show current quotes
 	$scope.currentQuotes = dataService.getData();
 
-	//Add quotes when bush "Submit" button
+	//Add quotes when push "Submit" button
 	$scope.addIt = function(){
 		dataService.addData($scope.addObj);
-
-		//Add new quote to quotes array; Clear boxes after added
-		// dataService.addData(text: $scope.addObj.text, author: $scope.addObj.author);	
-		// $scope.addIt.text = " ";
-		// $scope.addIt.author = " ";
+		//Clears input boxes
+		// $scope.addObj.text = "";
+		// $scope.addObj.author = "";
 	};
 
-	$scope.deleteIt = function(){
-		dataService.deleteData($scope.quote);
+	$scope.deleteIt = function(text){
+		dataService.removeData($scope.deleteObj.text);
+		$scope.deleteObj.text = "";
 	};
 });
